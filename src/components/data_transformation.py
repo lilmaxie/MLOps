@@ -46,7 +46,7 @@ class DataTransformation:
                 steps=[
                     ('imputer', SimpleImputer(strategy='most_frequent')),
                     ('onehotencoder', OneHotEncoder(handle_unknown='ignore')),
-                    ('scaler', StandardScaler()),
+                    ('scaler', StandardScaler(with_mean=False)),
                 ]
             )
             
@@ -111,5 +111,6 @@ class DataTransformation:
                 self.data_transformation_config.preprocessor_obj_file_path,
             )
          
-        except:
-            pass
+        except Exception as e:
+            raise CustomException(e, sys)
+            
